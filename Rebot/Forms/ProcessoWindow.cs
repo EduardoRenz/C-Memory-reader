@@ -45,12 +45,11 @@ namespace Rebot
             isRodando = !isRodando;
             if (isRodando)
             {
+                
                 BtScan.Text = "Cancelar";
-                // t.StartNew(() => task.lerProcesso(id));
-
-              
+                ulmem.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
+                memoria.Clear();
                 worker.RunWorkerAsync();
-
                 task.isRodando = true;
                 ulmem.Controls.Clear();
             }
@@ -73,7 +72,7 @@ namespace Rebot
         // WOKER FAZER TRABALHO
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            task.lerProcesso(id, worker);
+            task.lerProcesso(id, worker,pesquisa.Text);
            
         }
        // WORKER COMPLETO
@@ -81,12 +80,17 @@ namespace Rebot
         {
             ulmem.Enabled = false;
             isRodando = false;
-            for (int i = 1; i < 10; i++)
+            if ((pesquisa.Text == "") || (pesquisa.Text == null))
+            {
+
+         
+                for (int i = 1; i < 10; i++)
             {
                 string[] divisão = memoria[i].Split(':');    
-                ulmem.Controls.Add(new Label() { Text = divisão[0] }, 0, i);
-                ulmem.Controls.Add(new Label() { Text = divisão[1] }, 1, i);
+                ulmem.Controls.Add(new Label() { Text = divisão[1] }, 0, i-1);
+                ulmem.Controls.Add(new Label() { Text = divisão[0] }, 0, i-1);
                 
+            }
             }
             ulmem.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             ulmem.Enabled = true;

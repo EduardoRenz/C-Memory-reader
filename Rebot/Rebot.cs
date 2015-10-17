@@ -12,8 +12,6 @@ namespace Rebot
 {
     public partial class Rebot : Form
     {
-
-
         public bool ativo = false;
         public int seconds = 0;
         public TimeSpan tempo_restante;
@@ -45,7 +43,6 @@ namespace Rebot
                 ok.Text = "Ok";
                 timer.Stop();
             }
-
         }
 
         private void Start()

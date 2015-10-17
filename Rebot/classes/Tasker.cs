@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -104,7 +105,7 @@ namespace Rebot
         }
         // ---------------------------------------------------------------------------------------------------------------------------------
         // ----------------------------------------------------- LEITURA DE PROCESSO -------------------------------------------------------
-        public void lerProcesso(int idProcesso,BackgroundWorker worker)
+        public void lerProcesso(int idProcesso,BackgroundWorker worker,string pesquisa)
         {
             List<string> resultado = new List<string>();
             // getting minimum & maximum address
@@ -132,50 +133,74 @@ namespace Rebot
 
             int bytesRead = 0;  // number of bytes read with ReadProcessMemory
 
-            while (proc_min_address_l < proc_max_address_l)
+            if((pesquisa == "") || (pesquisa == null))
             {
-                // 28 = sizeof(MEMORY_BASIC_INFORMATION)
-                VirtualQueryEx(processHandle, proc_min_address, out mem_basic_info, 28);
-
-                // if this memory chunk is accessible
-                if (mem_basic_info.Protect == PAGE_READWRITE && mem_basic_info.State == MEM_COMMIT)
+                while (proc_min_address_l < proc_max_address_l)
                 {
-                    byte[] buffer = new byte[mem_basic_info.RegionSize];
+                    // 28 = sizeof(MEMORY_BASIC_INFORMATION)
+                    VirtualQueryEx(processHandle, proc_min_address, out mem_basic_info, 28);
 
-                    // read everything in the buffer above
-                    ReadProcessMemory((int)processHandle, mem_basic_info.BaseAddress, buffer, mem_basic_info.RegionSize, ref bytesRead);
-
-                    // then output this in the file
-                    for (int i = 0; i < mem_basic_info.RegionSize; i++)
+                    // if this memory chunk is accessible
+                    if (mem_basic_info.Protect == PAGE_READWRITE && mem_basic_info.State == MEM_COMMIT)
                     {
+                        byte[] buffer = new byte[mem_basic_info.RegionSize];
 
+                        // read everything in the buffer above
+                        ReadProcessMemory((int)processHandle, mem_basic_info.BaseAddress, buffer, mem_basic_info.RegionSize, ref bytesRead);
 
-                        Console.WriteLine((char)buffer[i]);
-                         // sw.WriteLine("0x{0} : {1}", (mem_basic_info.BaseAddress + i).ToString("X"), (char)buffer[i]);
-                        // memoria.Add((mem_basic_info.BaseAddress + i).ToString("X") + " : " + (char)buffer[i]);
-                         currentPosition = ((mem_basic_info.BaseAddress + i).ToString("X") + " : " + (char)buffer[i]);
-                      //  Console.WriteLine("0x{0} : {1}", (mem_basic_info.BaseAddress + i).ToString("X"), (char)buffer[i]);
-                      //  int progressoPercent = (i * 100) / Convert.ToInt32(mem_basic_info.RegionSize);
-                       // worker.ReportProgress(progressoPercent, currentPosition);
-                       //  Console.WriteLine(""  +i+ "/"+ mem_basic_info.RegionSize + " Geral: "+ progressoPercent);
-                        if (!isRodando)
-                        { 
-                            worker.CancelAsync();
-                            break;
+                        // then output this in the file
+                        for (int i = 0; i < mem_basic_info.RegionSize; i++)
+                        {
+                            // Console.WriteLine((char)buffer[i]);
+                            // sw.WriteLine("0x{0} : {1}", (mem_basic_info.BaseAddress + i).ToString("X"), (char)buffer[i]);
+                          //  memoria.Add((mem_basic_info.BaseAddress + i).ToString("X") + " : " + (char)buffer[i]);
+                          //  currentPosition = ((mem_basic_info.BaseAddress + i).ToString("X") + " : " + (char)buffer[i]);
+                            //  Console.WriteLine("0x{0} : {1}", (mem_basic_info.BaseAddress + i).ToString("X"), (char)buffer[i]);
+                            int progressoPercent = (i * 100) / Convert.ToInt32(mem_basic_info.RegionSize);
+                            worker.ReportProgress(progressoPercent, currentPosition);
+                            Console.WriteLine("" + i + "/" + mem_basic_info.RegionSize + " Geral: " + progressoPercent);
+                            if (!isRodando)
+                            {
+                                worker.CancelAsync();
+                                break;
+                            }
                         }
+                        worker.CancelAsync();
                     }
-                    worker.CancelAsync();
-                }
 
-                // move to the next memory chunk
-                proc_min_address_l += mem_basic_info.RegionSize;
-                proc_min_address = new IntPtr(proc_min_address_l);
-                if (!isRodando)
-                {
-                    worker.CancelAsync();
-                    break;
+                    // move to the next memory chunk
+                    proc_min_address_l += mem_basic_info.RegionSize;
+                    proc_min_address = new IntPtr(proc_min_address_l);
+                    if (!isRodando)
+                    {
+                        worker.CancelAsync();
+                        break;
+                    }
                 }
             }
+            else
+            {
+                byte[] pesquisabytes = Encoding.ASCII.GetBytes(pesquisa);
+                byte[] bytesbusca = new byte[mem_basic_info.RegionSize];
+                var len = pesquisabytes.Length;
+                var limit = proc_max_address_l;
+                for (var i = 0;i < mem_basic_info.RegionSize; i++)
+                {
+                    var k = 0;
+                    for (; k < len; k++)
+                    {
+                        if (pesquisabytes[k] != bytesbusca[i + k]) break;
+                    }
+                    if (k == len) {
+                        Console.WriteLine(k);
+                    }
+                }
+
+
+
+            }
+
+           
             worker.CancelAsync();
             sw.Close();
 
