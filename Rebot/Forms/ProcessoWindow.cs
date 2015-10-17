@@ -80,18 +80,16 @@ namespace Rebot
         {
             ulmem.Enabled = false;
             isRodando = false;
-            if ((pesquisa.Text == "") || (pesquisa.Text == null))
-            {
 
          
-                for (int i = 1; i < 10; i++)
+                for (int i = 1; i < 2; i++)
             {
                 string[] divisão = memoria[i].Split(':');    
                 ulmem.Controls.Add(new Label() { Text = divisão[1] }, 0, i-1);
                 ulmem.Controls.Add(new Label() { Text = divisão[0] }, 0, i-1);
                 
             }
-            }
+  
             ulmem.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             ulmem.Enabled = true;
             memoria.Clear();

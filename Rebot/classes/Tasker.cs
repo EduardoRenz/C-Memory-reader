@@ -107,6 +107,8 @@ namespace Rebot
         // ----------------------------------------------------- LEITURA DE PROCESSO -------------------------------------------------------
         public void lerProcesso(int idProcesso,BackgroundWorker worker,string pesquisa)
         {
+            byte[] pesquisabytes = Encoding.ASCII.GetBytes(pesquisa);
+            var len = pesquisabytes.Length;
             List<string> resultado = new List<string>();
             // getting minimum & maximum address
             SYSTEM_INFO sys_info = new SYSTEM_INFO();
@@ -133,8 +135,7 @@ namespace Rebot
 
             int bytesRead = 0;  // number of bytes read with ReadProcessMemory
 
-            if((pesquisa == "") || (pesquisa == null))
-            {
+        
                 while (proc_min_address_l < proc_max_address_l)
                 {
                     // 28 = sizeof(MEMORY_BASIC_INFORMATION)
@@ -151,21 +152,41 @@ namespace Rebot
                         // then output this in the file
                         for (int i = 0; i < mem_basic_info.RegionSize; i++)
                         {
-                            // Console.WriteLine((char)buffer[i]);
-                            // sw.WriteLine("0x{0} : {1}", (mem_basic_info.BaseAddress + i).ToString("X"), (char)buffer[i]);
-                          //  memoria.Add((mem_basic_info.BaseAddress + i).ToString("X") + " : " + (char)buffer[i]);
-                          //  currentPosition = ((mem_basic_info.BaseAddress + i).ToString("X") + " : " + (char)buffer[i]);
-                            //  Console.WriteLine("0x{0} : {1}", (mem_basic_info.BaseAddress + i).ToString("X"), (char)buffer[i]);
-                            int progressoPercent = (i * 100) / Convert.ToInt32(mem_basic_info.RegionSize);
-                            worker.ReportProgress(progressoPercent, currentPosition);
-                            Console.WriteLine("" + i + "/" + mem_basic_info.RegionSize + " Geral: " + progressoPercent);
-                            if (!isRodando)
+                        var k = 0;
+                        // Console.WriteLine((char)buffer[i]);
+                         sw.WriteLine("0x{0} : {1}", (mem_basic_info.BaseAddress + i).ToString("X"), (char)buffer[i]);
+                        //  memoria.Add((mem_basic_info.BaseAddress + i).ToString("X") + " : " + (char)buffer[i]);
+
+                       // currentPosition = ((mem_basic_info.BaseAddress + i).ToString("X") + " : " + (char)buffer[i]);
+                            
+                            //int progressoPercent = (i * 100) / Convert.ToInt32(mem_basic_info.RegionSize);
+                          //  worker.ReportProgress(progressoPercent, currentPosition);
+
+                      
+                        for (; k < len; k++)
+                        {
+                            if (pesquisabytes[k] != buffer[i + k]) break;
+                        }
+                        if (k == len)
+                        {
+                            Console.WriteLine("Achei em");
+                            Console.WriteLine("0x{0} : {1}", (mem_basic_info.BaseAddress + i).ToString("X"), (char)buffer[i]);
+                             memoria.Add((mem_basic_info.BaseAddress + i).ToString("X") + " : " + (char)buffer[i]);
+                        }
+
+                        if (!isRodando)
                             {
                                 worker.CancelAsync();
                                 break;
                             }
                         }
-                        worker.CancelAsync();
+
+
+
+
+                 
+
+                    worker.CancelAsync();
                     }
 
                     // move to the next memory chunk
@@ -177,30 +198,7 @@ namespace Rebot
                         break;
                     }
                 }
-            }
-            else
-            {
-                byte[] pesquisabytes = Encoding.ASCII.GetBytes(pesquisa);
-                byte[] bytesbusca = new byte[mem_basic_info.RegionSize];
-                var len = pesquisabytes.Length;
-                var limit = proc_max_address_l;
-                for (var i = 0;i < mem_basic_info.RegionSize; i++)
-                {
-                    var k = 0;
-                    for (; k < len; k++)
-                    {
-                        if (pesquisabytes[k] != bytesbusca[i + k]) break;
-                    }
-                    if (k == len) {
-                        Console.WriteLine(k);
-                    }
-                }
 
-
-
-            }
-
-           
             worker.CancelAsync();
             sw.Close();
 
