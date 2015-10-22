@@ -15,8 +15,7 @@ namespace Rebot
         public List<string> memoria = new List<string>();
         Tasker task = new Tasker();
         BackgroundWorker worker;
-        private delegate void Delegate();
-      
+
 
         public ProcessoWindow(string var_nao_tratada)
         {
@@ -41,17 +40,22 @@ namespace Rebot
 
         private void btnScan_Click(object sender, EventArgs e)
         {
-            TaskFactory t = new TaskFactory();
             isRodando = !isRodando;
             if (isRodando)
             {
-                
-                BtScan.Text = "Cancelar";
-                ulmem.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.None;
-                memoria.Clear();
-                worker.RunWorkerAsync();
-                task.isRodando = true;
-                ulmem.Controls.Clear();
+                if (pesquisa.Text != "")
+                {
+                    BtScan.Text = "Cancelar";
+                    ulmem.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
+                    memoria.Clear();
+                    worker.RunWorkerAsync();
+                    task.isRodando = true;
+                    ulmem.Controls.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("È muita coisa para pesquisar!");
+                }
             }
             else
             {
@@ -80,26 +84,32 @@ namespace Rebot
         {
             ulmem.Enabled = false;
             isRodando = false;
+            listarMemoria();
+            BtScan.Text = "Scan";
+            Console.WriteLine("Completo");
+           
 
-         
-                for (int i = 1; i < 2; i++)
-            {
-                string[] divisão = memoria[i].Split(':');    
-                ulmem.Controls.Add(new Label() { Text = divisão[1] }, 0, i-1);
-                ulmem.Controls.Add(new Label() { Text = divisão[0] }, 0, i-1);
-                
-            }
-  
-            ulmem.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            ulmem.Enabled = true;
-            memoria.Clear();
         }
-
         private void ProcessoWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             Dispose();
             memoria.Clear();
             task.isRodando = false;
+        }
+
+        private void listarMemoria()
+        {
+            for (int i = 0; i < memoria.Count; i++)
+            {
+                Console.WriteLine(" tem +" + memoria.Count);
+                string[] divisão = memoria[i].Split(':');
+                ulmem.Controls.Add(new Label() { Text = divisão[1] }, 0, i - 1);
+                ulmem.Controls.Add(new TextBox() { Text = divisão[0], ReadOnly = true, BackColor = BackColor, BorderStyle = 0, ForeColor = System.Drawing.Color.White }, 0, i - 1);
+                ulmem.Controls.Add(new TextBox() { Text = " " }, 2, i - 1);
+            }
+            ulmem.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            ulmem.Enabled = true;
+            memoria.Clear();
         }
     }
 }

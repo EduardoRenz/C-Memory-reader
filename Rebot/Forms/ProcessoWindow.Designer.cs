@@ -104,16 +104,16 @@
             // 
             // pesquisa
             // 
-            this.pesquisa.Location = new System.Drawing.Point(17, 65);
+            this.pesquisa.Location = new System.Drawing.Point(17, 64);
             this.pesquisa.Name = "pesquisa";
-            this.pesquisa.Size = new System.Drawing.Size(293, 20);
+            this.pesquisa.Size = new System.Drawing.Size(368, 20);
             this.pesquisa.TabIndex = 0;
             // 
             // BtScan
             // 
-            this.BtScan.Location = new System.Drawing.Point(334, 63);
+            this.BtScan.Location = new System.Drawing.Point(391, 62);
             this.BtScan.Name = "BtScan";
-            this.BtScan.Size = new System.Drawing.Size(75, 23);
+            this.BtScan.Size = new System.Drawing.Size(74, 23);
             this.BtScan.TabIndex = 4;
             this.BtScan.Text = "Scan";
             this.BtScan.UseVisualStyleBackColor = true;
@@ -121,14 +121,15 @@
             // 
             // progresso
             // 
-            this.progresso.Location = new System.Drawing.Point(425, 65);
+            this.progresso.Location = new System.Drawing.Point(471, 62);
             this.progresso.Name = "progresso";
-            this.progresso.Size = new System.Drawing.Size(289, 23);
+            this.progresso.Size = new System.Drawing.Size(250, 23);
             this.progresso.TabIndex = 5;
             // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.AutoSize = true;
             this.panel1.Controls.Add(this.labelTValorCondi);
             this.panel1.Controls.Add(this.ulmem);
             this.panel1.Controls.Add(this.labelTEndereco);
@@ -154,14 +155,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(720, 450);
+            this.ClientSize = new System.Drawing.Size(774, 450);
+            this.Controls.Add(this.pesquisa);
+            this.Controls.Add(this.BtScan);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.progresso);
-            this.Controls.Add(this.BtScan);
-            this.Controls.Add(this.pesquisa);
             this.Controls.Add(this.idProcesso);
             this.Controls.Add(this.titulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(200, 300);
             this.Name = "ProcessoWindow";
             this.Text = "processo";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProcessoWindow_FormClosed);
