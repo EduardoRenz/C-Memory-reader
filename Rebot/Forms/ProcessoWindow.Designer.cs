@@ -123,7 +123,7 @@
             // 
             this.progresso.Location = new System.Drawing.Point(471, 62);
             this.progresso.Name = "progresso";
-            this.progresso.Size = new System.Drawing.Size(250, 23);
+            this.progresso.Size = new System.Drawing.Size(291, 23);
             this.progresso.TabIndex = 5;
             // 
             // panel1
@@ -136,7 +136,7 @@
             this.panel1.Controls.Add(this.labelTValor);
             this.panel1.Location = new System.Drawing.Point(7, 100);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(714, 338);
+            this.panel1.Size = new System.Drawing.Size(755, 338);
             this.panel1.TabIndex = 1;
             // 
             // labelTValor
@@ -155,7 +155,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(774, 450);
+            this.ClientSize = new System.Drawing.Size(771, 450);
             this.Controls.Add(this.pesquisa);
             this.Controls.Add(this.BtScan);
             this.Controls.Add(this.panel1);
