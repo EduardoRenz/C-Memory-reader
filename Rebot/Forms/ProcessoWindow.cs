@@ -13,7 +13,7 @@ namespace Rebot
         private int id;
         private string tituloProcesso;
         public List<string> memoria = new List<string>();
-        Tasker farejadorProcessos = new Tasker();
+        MemoryReader farejadorProcessos = new MemoryReader();
         BackgroundWorker workerThread;
 
         public ProcessoWindow(string var_nao_tratada)
@@ -45,23 +45,23 @@ namespace Rebot
                 {
                     BtScan.Text = "Cancelar";
                     progresso.Value = 0;
-                    ulmem.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
                     memoria.Clear();
-                    ulmem.Controls.Clear();
-                    workerThread.RunWorkerAsync();
-                    farejadorProcessos.isRodando = true;       
+                    gridResult.Rows.Clear();
+                    farejadorProcessos.isRodando = true;
+                    workerThread.RunWorkerAsync();      
                 }
                 else
                 {
                     MessageBox.Show("È muita coisa para pesquisar!");
+                    isRodando = false;
                 }
             }
             else
             {
                 BtScan.Text = "Scan";
                 farejadorProcessos.isRodando = false;
-                memoria = farejadorProcessos.memoria;
             }
+            memoria = farejadorProcessos.memoria;
         }
         // RETORNO DO WORKER
         private void workerRetorno(object sender, ProgressChangedEventArgs e)
@@ -78,10 +78,8 @@ namespace Rebot
         // WORKER COMPLETO
         private void workercompleto(object sender, RunWorkerCompletedEventArgs e)
         {
-            ulmem.Enabled = false;
             isRodando = false;
             listarMemoria();
-            ulmem.Enabled = true;
             BtScan.Text = "Scan";
             Console.WriteLine("Completo");
         }
@@ -97,11 +95,8 @@ namespace Rebot
             for (int i = 0; i < memoria.Count; i++)
             {
                 string[] divisão = memoria[i].Split(':');
-                ulmem.Controls.Add(new Label() { Text = divisão[1] }, 0, i - 1);
-                ulmem.Controls.Add(new TextBox() { Text = divisão[0], ReadOnly = true, BackColor = BackColor, BorderStyle = 0, ForeColor = System.Drawing.Color.White }, 0, i - 1);
-                ulmem.Controls.Add(new TextBox() { Text = " " }, 2, i - 1);
+                gridResult.Rows.Add(divisão[0], divisão[1]);
             }
-            ulmem.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
         }
     }
 }

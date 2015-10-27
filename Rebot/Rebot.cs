@@ -15,7 +15,7 @@ namespace Rebot
         public bool ativo = false;
         public int seconds = 0;
         public TimeSpan tempo_restante;
-        Tasker tasker = new Tasker();
+        MemoryReader tasker = new MemoryReader();
         public Rebot(){
           InitializeComponent();
           timer.Tick += new EventHandler(regresso);

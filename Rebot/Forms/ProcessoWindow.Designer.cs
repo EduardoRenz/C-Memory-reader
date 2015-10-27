@@ -28,163 +28,187 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProcessoWindow));
-            this.titulo = new System.Windows.Forms.Label();
-            this.ulmem = new System.Windows.Forms.TableLayoutPanel();
-            this.labelTValorCondi = new System.Windows.Forms.Label();
-            this.labelTEndereco = new System.Windows.Forms.Label();
-            this.idProcesso = new System.Windows.Forms.Label();
-            this.pesquisa = new System.Windows.Forms.TextBox();
-            this.BtScan = new System.Windows.Forms.Button();
             this.progresso = new System.Windows.Forms.ProgressBar();
+            this.titulo = new System.Windows.Forms.Label();
+            this.pesquisa = new System.Windows.Forms.TextBox();
+            this.idProcesso = new System.Windows.Forms.Label();
+            this.BtScan = new System.Windows.Forms.Button();
+            this.gridResult = new System.Windows.Forms.DataGridView();
+            this.valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Endereco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.painelTopo = new System.Windows.Forms.Panel();
+            this.divScan = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labelTValor = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.gridResult)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.painelTopo.SuspendLayout();
+            this.divScan.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // progresso
+            // 
+            this.progresso.Location = new System.Drawing.Point(90, 56);
+            this.progresso.Name = "progresso";
+            this.progresso.Size = new System.Drawing.Size(279, 21);
+            this.progresso.TabIndex = 5;
             // 
             // titulo
             // 
             this.titulo.AutoSize = true;
             this.titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titulo.ForeColor = System.Drawing.Color.Snow;
-            this.titulo.Location = new System.Drawing.Point(12, 9);
+            this.titulo.Location = new System.Drawing.Point(3, 0);
             this.titulo.Name = "titulo";
             this.titulo.Size = new System.Drawing.Size(181, 26);
             this.titulo.TabIndex = 0;
             this.titulo.Text = "Processo Nome";
             // 
-            // ulmem
+            // pesquisa
             // 
-            this.ulmem.AutoSize = true;
-            this.ulmem.ColumnCount = 3;
-            this.ulmem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.ulmem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 401F));
-            this.ulmem.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
-            this.ulmem.ForeColor = System.Drawing.Color.Snow;
-            this.ulmem.Location = new System.Drawing.Point(10, 28);
-            this.ulmem.Name = "ulmem";
-            this.ulmem.RowCount = 2;
-            this.ulmem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.ulmem.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
-            this.ulmem.Size = new System.Drawing.Size(691, 41);
-            this.ulmem.TabIndex = 0;
-            // 
-            // labelTValorCondi
-            // 
-            this.labelTValorCondi.AutoSize = true;
-            this.labelTValorCondi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTValorCondi.ForeColor = System.Drawing.Color.Transparent;
-            this.labelTValorCondi.Location = new System.Drawing.Point(555, 4);
-            this.labelTValorCondi.Name = "labelTValorCondi";
-            this.labelTValorCondi.Size = new System.Drawing.Size(135, 17);
-            this.labelTValorCondi.TabIndex = 2;
-            this.labelTValorCondi.Text = "Valor Condicional";
-            // 
-            // labelTEndereco
-            // 
-            this.labelTEndereco.AutoSize = true;
-            this.labelTEndereco.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTEndereco.ForeColor = System.Drawing.Color.Snow;
-            this.labelTEndereco.Location = new System.Drawing.Point(16, 4);
-            this.labelTEndereco.Name = "labelTEndereco";
-            this.labelTEndereco.Size = new System.Drawing.Size(77, 17);
-            this.labelTEndereco.TabIndex = 0;
-            this.labelTEndereco.Text = "Endereço";
-            this.labelTEndereco.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pesquisa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pesquisa.Location = new System.Drawing.Point(8, 55);
+            this.pesquisa.Name = "pesquisa";
+            this.pesquisa.Size = new System.Drawing.Size(400, 20);
+            this.pesquisa.TabIndex = 0;
             // 
             // idProcesso
             // 
             this.idProcesso.AutoSize = true;
             this.idProcesso.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.idProcesso.ForeColor = System.Drawing.Color.Snow;
-            this.idProcesso.Location = new System.Drawing.Point(13, 35);
+            this.idProcesso.Location = new System.Drawing.Point(4, 26);
             this.idProcesso.Name = "idProcesso";
             this.idProcesso.Size = new System.Drawing.Size(45, 20);
             this.idProcesso.TabIndex = 3;
             this.idProcesso.Text = "0000";
             // 
-            // pesquisa
-            // 
-            this.pesquisa.Location = new System.Drawing.Point(17, 64);
-            this.pesquisa.Name = "pesquisa";
-            this.pesquisa.Size = new System.Drawing.Size(368, 20);
-            this.pesquisa.TabIndex = 0;
-            // 
             // BtScan
             // 
-            this.BtScan.Location = new System.Drawing.Point(391, 62);
+            this.BtScan.Location = new System.Drawing.Point(0, 55);
             this.BtScan.Name = "BtScan";
-            this.BtScan.Size = new System.Drawing.Size(74, 23);
+            this.BtScan.Size = new System.Drawing.Size(74, 22);
             this.BtScan.TabIndex = 4;
             this.BtScan.Text = "Scan";
             this.BtScan.UseVisualStyleBackColor = true;
             this.BtScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
-            // progresso
+            // gridResult
             // 
-            this.progresso.Location = new System.Drawing.Point(471, 62);
-            this.progresso.Name = "progresso";
-            this.progresso.Size = new System.Drawing.Size(291, 23);
-            this.progresso.TabIndex = 5;
+            this.gridResult.AllowUserToDeleteRows = false;
+            this.gridResult.BackgroundColor = System.Drawing.SystemColors.HotTrack;
+            this.gridResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridResult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Endereco,
+            this.valor});
+            this.gridResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridResult.Location = new System.Drawing.Point(3, 94);
+            this.gridResult.MinimumSize = new System.Drawing.Size(800, 0);
+            this.gridResult.Name = "gridResult";
+            this.gridResult.ReadOnly = true;
+            this.gridResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.gridResult.Size = new System.Drawing.Size(880, 459);
+            this.gridResult.TabIndex = 3;
+            // 
+            // valor
+            // 
+            this.valor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.valor.HeaderText = "Valor";
+            this.valor.Name = "valor";
+            this.valor.ReadOnly = true;
+            // 
+            // Endereco
+            // 
+            this.Endereco.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Endereco.HeaderText = "Endereço";
+            this.Endereco.Name = "Endereco";
+            this.Endereco.ReadOnly = true;
+            this.Endereco.ToolTipText = "Endereço na memória";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.painelTopo, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.gridResult, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.36691F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.63309F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(886, 556);
+            this.tableLayoutPanel1.TabIndex = 6;
+            // 
+            // painelTopo
+            // 
+            this.painelTopo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.painelTopo.Controls.Add(this.panel1);
+            this.painelTopo.Controls.Add(this.divScan);
+            this.painelTopo.Location = new System.Drawing.Point(3, 3);
+            this.painelTopo.Name = "painelTopo";
+            this.painelTopo.Size = new System.Drawing.Size(880, 85);
+            this.painelTopo.TabIndex = 0;
+            // 
+            // divScan
+            // 
+            this.divScan.Controls.Add(this.BtScan);
+            this.divScan.Controls.Add(this.progresso);
+            this.divScan.Dock = System.Windows.Forms.DockStyle.Right;
+            this.divScan.Location = new System.Drawing.Point(498, 0);
+            this.divScan.Name = "divScan";
+            this.divScan.Size = new System.Drawing.Size(382, 85);
+            this.divScan.TabIndex = 6;
             // 
             // panel1
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.labelTValorCondi);
-            this.panel1.Controls.Add(this.ulmem);
-            this.panel1.Controls.Add(this.labelTEndereco);
-            this.panel1.Controls.Add(this.labelTValor);
-            this.panel1.Location = new System.Drawing.Point(7, 100);
+            this.panel1.Controls.Add(this.titulo);
+            this.panel1.Controls.Add(this.pesquisa);
+            this.panel1.Controls.Add(this.idProcesso);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(755, 338);
-            this.panel1.TabIndex = 1;
-            // 
-            // labelTValor
-            // 
-            this.labelTValor.AutoSize = true;
-            this.labelTValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTValor.ForeColor = System.Drawing.Color.Snow;
-            this.labelTValor.Location = new System.Drawing.Point(154, 4);
-            this.labelTValor.Name = "labelTValor";
-            this.labelTValor.Size = new System.Drawing.Size(46, 17);
-            this.labelTValor.TabIndex = 1;
-            this.labelTValor.Text = "Valor";
+            this.panel1.Size = new System.Drawing.Size(419, 85);
+            this.panel1.TabIndex = 7;
             // 
             // ProcessoWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(771, 450);
-            this.Controls.Add(this.pesquisa);
-            this.Controls.Add(this.BtScan);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.progresso);
-            this.Controls.Add(this.idProcesso);
-            this.Controls.Add(this.titulo);
+            this.ClientSize = new System.Drawing.Size(886, 561);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(200, 300);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "ProcessoWindow";
             this.Text = "processo";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ProcessoWindow_FormClosed);
+            ((System.ComponentModel.ISupportInitialize)(this.gridResult)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.painelTopo.ResumeLayout(false);
+            this.divScan.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label titulo;
-        private System.Windows.Forms.Label idProcesso;
-        private System.Windows.Forms.TextBox pesquisa;
-        private System.Windows.Forms.TableLayoutPanel ulmem;
-        private System.Windows.Forms.Label labelTEndereco;
-        private System.Windows.Forms.Label labelTValorCondi;
-        private System.Windows.Forms.Button BtScan;
         private System.Windows.Forms.ProgressBar progresso;
+        private System.Windows.Forms.Label titulo;
+        private System.Windows.Forms.TextBox pesquisa;
+        private System.Windows.Forms.Label idProcesso;
+        private System.Windows.Forms.Button BtScan;
+        private System.Windows.Forms.DataGridView gridResult;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Endereco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valor;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel painelTopo;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label labelTValor;
+        private System.Windows.Forms.Panel divScan;
     }
 }

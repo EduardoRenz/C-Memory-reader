@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Rebot
 {
-    class Tasker
+    class MemoryReader
     {
         // VARIAVEIS
         public bool isRodando { get; set; }
@@ -64,7 +64,7 @@ namespace Rebot
         static extern bool WriteProcessMemory(int hProcess, int lpBaseAddress,
           byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesWritten);
         // ==================================================================================================================================================
-        public Tasker()
+        public MemoryReader()
         {
             processos = Process.GetProcesses();
             isRodando = true;
@@ -123,16 +123,23 @@ namespace Rebot
                     {
                         
                         var vetStrBusca = 0;
-                        sw.WriteLine("0x{0} : {1}", (mem_basic_info.BaseAddress + i).ToString("X"), (char)buffer[i]); // escreve no arquivo texto
+                       // sw.WriteLine("0x{0} : {1}", (mem_basic_info.BaseAddress + i).ToString("X"), (char)buffer[i]); // escreve no arquivo texto
                         // =======================================================
                         for (; vetStrBusca < tamanhoStr; vetStrBusca++)
                         {
-                            if (pesquisabytes[vetStrBusca] != buffer[i + vetStrBusca]) break;
+                            try
+                            {
+                                if (pesquisabytes[vetStrBusca] != buffer[i + vetStrBusca]) break;
+                            }
+                            catch
+                            {
+
+                            }         
                         }
                         if (vetStrBusca == tamanhoStr)
                         {
                             ler((mem_basic_info.BaseAddress + i), pesquisa, idProcesso);
-                          memoria.Add((mem_basic_info.BaseAddress + i).ToString("X") + " : " + pesquisa);
+                            memoria.Add((mem_basic_info.BaseAddress + i).ToString("X") + " : " + pesquisa);
                             // escrever((mem_basic_info.BaseAddress + i), "It", process.Id);      
                         }
                         if (isRodando == false)
@@ -157,7 +164,7 @@ namespace Rebot
             int bytesRead = 0;
             byte[] buffer = new byte[valor.Length]; 
             ReadProcessMemory((int)processHandle, endereco, buffer, buffer.Length, ref bytesRead);
-            Console.WriteLine(Encoding.ASCII.GetString(buffer) + " (" + bytesRead.ToString() + "bytes) em" + endereco.ToString("X"));
+            Console.WriteLine(Encoding.ASCII.GetString(buffer) + " (" + bytesRead.ToString() + "bytes) em " + endereco.ToString("X"));
         } // LE UM ENDERECO DA MEMORIA
         public void escrever(int endereco, string valor, int idProcesso)
         {

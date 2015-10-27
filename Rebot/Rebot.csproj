@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="classes\Tasker.cs" />
+    <Compile Include="classes\MemoryReader.cs" />
     <Compile Include="Forms\ProcessoWindow.cs">
       <SubType>Form</SubType>
     </Compile>
